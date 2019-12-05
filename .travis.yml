@@ -1,0 +1,16 @@
+notifications:
+  email: false
+
+matrix:
+  include:
+    - os: linux
+      language: c
+    - os: osx
+      language: c
+
+before_script:
+  - cmake --version
+
+script:
+  - cmake -S . -B build
+  - cmake --build build

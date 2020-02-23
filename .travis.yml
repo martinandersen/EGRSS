@@ -3,8 +3,9 @@ notifications:
 
 matrix:
   include:
-    - os: linux
-      language: c
+#    - os: linux
+#      dist: bionic
+#      language: c
     - os: osx
       language: c
 

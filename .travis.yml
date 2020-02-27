@@ -1,17 +1,23 @@
 notifications:
   email: false
 
-matrix:
-  include:
-#    - os: linux
-#      dist: bionic
-#      language: c
-    - os: osx
-      language: c
+language: c
+
+os:
+  - linux
+  - osx
+  - windows
+
+jobs:
+  allow_failures:
+    - os: windows
 
 before_script:
   - cmake --version
 
 script:
-  - cmake -S . -B build
-  - cmake --build build
+  - mkdir build && cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build .
+
+after_success:
+  - ctest -C Debug

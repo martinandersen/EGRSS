@@ -12,8 +12,3 @@ add_test(NAME core_dsplkgr COMMAND test_dsplkgr)
 add_executable(test_dpotrf test_dpotrf.c)
 target_link_libraries(test_dpotrf PRIVATE egrss)
 add_test(NAME core_dpotrf COMMAND test_dpotrf)
-
-add_custom_command(TARGET test_dsplkgr
-    POST_BUILD
-    COMMAND ctest -C $<CONFIG>
-)

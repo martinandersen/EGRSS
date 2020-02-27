@@ -15,9 +15,20 @@ The project currently provides the following:
 
 ## Building and testing
 
+Cmake 3.13.5 or later:
+
 ```
 $ cmake -S . -B build 
 $ cmake --build build
+$ cd build && ctest .
+```
+
+Earlier versions of Cmake:
+
+```
+$ mkdir build 
+$ cd build && cmake .. && cmake --build .
+$ ctest .
 ```
 
 ## Building the MATLAB MEX interface

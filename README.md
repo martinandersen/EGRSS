@@ -42,6 +42,24 @@ $ cmake -S . -B build -DBUILD_MEX=ON
 $ cmake --build build
 ```
 
+## Compiling the C example
+
+The example in `examples/c` requires BLAS and LAPACK, and this can be configured using the `BLA_VENDOR` option and by specifying the path via `CMAKE_PREFIX_PATH`, as illustrated in the following examples. 
+
+### OpenBLAS 
+
+```
+cmake -S . -B build -DBUILD_EXAMPLES=ON -DBLA_VENDOR=OpenBLAS -DCMAKE_PREFIX_PATH=/usr/local/opt/openblas
+cmake --build build
+```
+
+### MKL
+
+```
+cmake -S . -B build -DBUILD_EXAMPLES=ON -DBLA_VENDOR=Intel10_64lp -DCMAKE_PREFIX_PATH=/opt/intel/lib
+cmake --build build
+```
+
 ## License
 
 This project is licensed under the [BSD 2-Clause](LICENSE) license.

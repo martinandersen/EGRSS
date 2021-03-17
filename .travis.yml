@@ -1,8 +1,8 @@
 notifications:
   email: false
 
-language: c
-python: 3.9
+language: python
+python: "3.9"
 
 os:
   - linux

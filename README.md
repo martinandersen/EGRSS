@@ -36,6 +36,12 @@ $ cd build && cmake .. && cmake --build .
 $ ctest .
 ```
 
+## Installing the Python package
+
+```
+pip install git+https://github.com/martinandersen/EGRSS.git#subdirectory=src/python
+```
+
 ## Building the MATLAB MEX interface
 
 ```

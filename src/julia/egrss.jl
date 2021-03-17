@@ -427,15 +427,13 @@ L = tril(Ut'*Wt) or L = tril(Ut'*Wt,-1) + diag(c).
 function trtri2(Ut,Wt,c=Nothing)
     p, n = size(Ut)
     Linv = zeros(eltype(Ut),n,n)
+    e = zeros(eltype(Ut),n)
+    e[1] = 1
     if c === Nothing
-        e = zeros(eltype(Ut),n)
-        e[1] = 1
         for k = 1:n
             Linv[k:end,:] = trsv(Ut,Wt,e[1:end+1-k])
         end
     else
-        e = zeros(eltype(Ut),n)
-        e[1] = 1
         for k = 1:n
             Linv[k:end,k] = trsv(Ut[:,k:end],Wt[:,k:end],c[k:end],e[1:end+1-k])
         end

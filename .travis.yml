@@ -18,6 +18,9 @@ before_script:
 script:
   - mkdir build && cd build
   - cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build .
+#  - cd ${TRAVIS_BUILD_DIR}/src/python && pip install .
+
 
 after_success:
-  - ctest -C Debug
+  - cd ${TRAVIS_BUILD_DIR}/build && ctest -C Debug
+#  - cd ${TRAVIS_BUILD_DIR}/src/python && pytest

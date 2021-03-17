@@ -8,7 +8,8 @@ This project provides implementations of a set of algorithms for computations th
 > Structured Matrices: Revisiting the Spline Kernel,” SIAM Journal on
 > Matrix Analysis and Applications, vol. 42, no. 2,
 > pp. 389–412, 2020.
-> DOI: [10.1137/19M1267349](http://dx.doi.org/10.1137/19M1267349)
+
+[![DOI](https://img.shields.io/badge/doi-10.1137/19M1267349-brightgr)](http://dx.doi.org/10.1137/19M1267349)
 
 The project currently provides the following:
 

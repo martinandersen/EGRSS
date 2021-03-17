@@ -86,11 +86,11 @@ class TestEGRSS(unittest.TestCase):
 
         Wt = egrss.potrf(Ut,Vt)
         L = np.tril(Ut.T@Wt)
-        npt.assert_almost_equal(egrss.tril(Ut,Wt),L)
+        npt.assert_almost_equal(egrss.full_tril(Ut,Wt),L)
 
         Wt,c = egrss.potrf(Ut,Vt,1e-3)
         L = np.tril(Ut.T@Wt,-1) + np.diag(c)
-        npt.assert_almost_equal(egrss.tril(Ut,Wt,c),L)
+        npt.assert_almost_equal(egrss.full_tril(Ut,Wt,c),L)
 
     def test_potrf(self):
         import egrss
@@ -102,24 +102,24 @@ class TestEGRSS(unittest.TestCase):
 
         Wt = egrss.potrf(Ut,Vt)
         Lref = np.linalg.cholesky(K)
-        L = egrss.tril(Ut,Wt)
+        L = egrss.full_tril(Ut,Wt)
         npt.assert_almost_equal(L,Lref)
 
         alpha = 1e-6
         Wt,c = egrss.potrf(Ut,Vt,alpha)
         Lref = np.linalg.cholesky(K + np.diag(alpha*np.ones(n)))
-        L = egrss.tril(Ut,Wt,c)
+        L = egrss.full_tril(Ut,Wt,c)
         npt.assert_almost_equal(L,Lref)
 
         d = t + 1e-3
         Wt,c = egrss.potrf(Ut,Vt,d)
         Lref = np.linalg.cholesky(K + np.diag(d))
-        L = egrss.tril(Ut,Wt,c)
+        L = egrss.full_tril(Ut,Wt,c)
         npt.assert_almost_equal(L,Lref)
 
     def test_ldl(self):
         import egrss
-        n,p = (50,3)
+        n,p = (50,2)
         t = np.linspace(0.02,1.0,n)
         Ut,Vt = egrss.generators(t,p)
 
@@ -127,21 +127,21 @@ class TestEGRSS(unittest.TestCase):
 
         Wt,c = egrss.ldl(Ut,Vt)
         Lref = np.linalg.cholesky(K)
-        L = egrss.tril(Ut,Wt,1.0)
+        L = egrss.full_tril(Ut,Wt,1.0)
         npt.assert_almost_equal(np.sqrt(c),np.diag(Lref))
         npt.assert_almost_equal(L,Lref/np.diag(Lref).T)
 
         alpha = 1e-6
         Wt,c = egrss.ldl(Ut,Vt,alpha)
         Lref = np.linalg.cholesky(egrss.full(Ut,Vt,alpha))
-        L = egrss.tril(Ut,Wt,1.0)
+        L = egrss.full_tril(Ut,Wt,1.0)
         npt.assert_almost_equal(np.sqrt(c),np.diag(Lref))
         npt.assert_almost_equal(L,Lref/np.diag(Lref).T)
 
         d = t + 1e-3
         Wt,c = egrss.ldl(Ut,Vt,d)
         Lref = np.linalg.cholesky(egrss.full(Ut,Vt,d))
-        L = egrss.tril(Ut,Wt,1.0)
+        L = egrss.full_tril(Ut,Wt,1.0)
         npt.assert_almost_equal(np.sqrt(c),np.diag(Lref))
         npt.assert_almost_equal(L,Lref/np.diag(Lref).T)
 
@@ -182,7 +182,7 @@ class TestEGRSS(unittest.TestCase):
 
     def test_trsv(self):
         import egrss
-        n,p = (50,3)
+        n,p = (50,2)
         t = np.linspace(0.02,1.0,n)
         Ut,Vt = egrss.generators(t,p)
 
@@ -194,12 +194,12 @@ class TestEGRSS(unittest.TestCase):
         Wt = egrss.potrf(Ut,Vt)
         xref = np.linalg.solve(Lref,b)
         x = egrss.trsv(Ut,Wt,b)
-        npt.assert_almost_equal(x,xref)
+        npt.assert_almost_equal(x,xref,decimal=5)
         x = egrss.trsv(Ut,Wt,b,trans='N')
-        npt.assert_almost_equal(x,xref)
+        npt.assert_almost_equal(x,xref,decimal=5)
         xref = np.linalg.solve(Lref.T,b)
         x = egrss.trsv(Ut,Wt,b,trans='T')
-        npt.assert_almost_equal(x,xref)
+        npt.assert_almost_equal(x,xref,decimal=5)
 
         d = t + 1e-3
         Lref = np.linalg.cholesky(egrss.full(Ut,Vt,d))
@@ -222,10 +222,10 @@ class TestEGRSS(unittest.TestCase):
 
         Wt,c = egrss.potrf(Ut,Vt,1e-2)
         Yt,Zt = egrss.trtri(Ut,Wt,c)
-        L = egrss.tril(Ut,Wt,c)
+        L = egrss.full_tril(Ut,Wt,c)
         Linv_ref = np.tril(np.linalg.inv(L))
 
-        invL = egrss.tril(Yt,Zt,1.0/c)
+        invL = egrss.full_tril(Yt,Zt,1.0/c)
         npt.assert_almost_equal(invL,Linv_ref)
 
         invL = egrss.trtri2(Ut,Wt,c);
@@ -238,7 +238,7 @@ class TestEGRSS(unittest.TestCase):
         Ut,Vt = egrss.generators(t,p)
 
         Wt,c = egrss.potrf(Ut,Vt,1e-4*np.ones(n))
-        Lref = egrss.tril(Ut,Wt,c)
+        Lref = egrss.full_tril(Ut,Wt,c)
         nrmref = np.sum(Lref**2,axis=0).flatten()
         nrm = egrss.trnrms(Ut,Wt,c)
         npt.assert_almost_equal(nrm,nrmref)

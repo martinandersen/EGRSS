@@ -22,7 +22,6 @@ def generators(t,p):
     Ut, Vt = generators(t,p)
     ```
     """
-    n = len(t)
     if t.ndim != 1: raise ValueError('t must be a one-dimensional array')
 
     if np.all(np.diff(t) > 0):
@@ -34,7 +33,7 @@ def generators(t,p):
 
     T = np.vander(t, 2*p)/np.flip(np.cumprod(np.hstack([1,np.arange(1,2*p)])))
     Ut = T[:,p:].T
-    Vt = T[:,0:p].T
+    Vt = (np.fliplr(T[:,:p])*((-1)**np.arange(0,p))).T
     if monotonic == 1:
         return Ut,Vt
     else:
@@ -138,13 +137,13 @@ def ldl(Ut,Vt, d = None):
     return Wt, c
 
 
-def tril(Ut, Wt, d = None):
+def full_tril(Ut, Wt, d = None):
     """
     Forms dense lower triangular matrix from generator representation.
 
-    L = tril(Ut,Wt) forms the lower triangular matrix L = tril(Ut'*Wt).
+    L = full_tril(Ut,Wt) forms the lower triangular matrix L = tril(Ut'*Wt).
 
-    L = tril(Ut,Wt,d) forms the lower triangular matrix L = tril(Ut'*Wt,-1) + diag(d).
+    L = full_tril(Ut,Wt,d) forms the lower triangular matrix L = tril(Ut'*Wt,-1) + diag(d).
     """
     if d is None:
         return np.tril(Ut.T@Wt)

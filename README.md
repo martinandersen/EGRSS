@@ -13,8 +13,9 @@ This project provides implementations of a set of algorithms for computations th
 The project currently provides the following:
 
 - C implementation/library (double precision)
-- Julia reference implementation
-- MATLAB reference implementation
+- Python implementation
+- Julia implementation
+- MATLAB implementation
 - MATLAB MEX interface to C implementation
 
 ## Building and testing
@@ -22,7 +23,7 @@ The project currently provides the following:
 Cmake 3.13.5 or later:
 
 ```
-$ cmake -S . -B build 
+$ cmake -S . -B build
 $ cmake --build build
 $ cd build && ctest .
 ```
@@ -30,7 +31,7 @@ $ cd build && ctest .
 Earlier versions of Cmake:
 
 ```
-$ mkdir build 
+$ mkdir build
 $ cd build && cmake .. && cmake --build .
 $ ctest .
 ```
@@ -44,9 +45,9 @@ $ cmake --build build
 
 ## Compiling the C example
 
-The example in `examples/c` requires BLAS and LAPACK, and this can be configured using the `BLA_VENDOR` option and by specifying the path via `CMAKE_PREFIX_PATH`, as illustrated in the following examples. 
+The example in `examples/c` requires BLAS and LAPACK, and this can be configured using the `BLA_VENDOR` option and by specifying the path via `CMAKE_PREFIX_PATH`, as illustrated in the following examples.
 
-### OpenBLAS 
+### OpenBLAS
 
 ```
 cmake -S . -B build -DBUILD_EXAMPLES=ON -DBLA_VENDOR=OpenBLAS -DCMAKE_PREFIX_PATH=/usr/local/opt/openblas

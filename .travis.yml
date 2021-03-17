@@ -2,6 +2,7 @@ notifications:
   email: false
 
 language: c
+python: 3.9
 
 os:
   - linux
@@ -21,3 +22,5 @@ script:
 
 after_success:
   - ctest -C Debug
+  - cd ../src/python
+  - pytest .

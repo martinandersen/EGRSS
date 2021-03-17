@@ -4,6 +4,7 @@ project (egrss VERSION 0.1.0)
 option(BUILD_MEX "Build MEX files" OFF)
 option(BUILD_DOC "Build documentation" OFF)
 option(BUILD_EXAMPLES "Build examples" OFF)
+option(TEST_PYTHON "Test Python package" OFF)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
@@ -19,6 +20,7 @@ if(BUILD_MEX)
             "R2019a=9.6"
             "R2019b=9.7"
             "R2020a=9.8"
+	    "R2020b=9.9"
     )
     add_subdirectory(src/matlab/mex)
     add_subdirectory(src/matlab/ref)

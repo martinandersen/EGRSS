@@ -49,7 +49,7 @@ assert(length(x) == size(Ut,2) && isvector(x),'Dimension mismatch: x must be a v
 b = x;
 z = zeros(p,1);
 
-if exist('c')
+if exist('c','var')
     assert(length(c) == size(Ut,2) && isvector(c),'Dimension mismatch: c must be a vector of length size(Ut,2)')
     switch lower(trans)
         case 'n'

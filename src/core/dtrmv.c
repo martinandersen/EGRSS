@@ -24,7 +24,7 @@ with generators \f$U,W \in \mathbb{R}^{n \times p}\f$ and \f$c \in \mathbb{R}^n\
 @param[in] W      row-major array of size n-by-p
 @param[in] ldw    leading dimension of W
 @param[in] c      array of length n
-@param[in] incc   stride of d
+@param[in] incc   stride of c
 @param[in,out] x  array of length n
 @param[in] incx   stride of x
 @param[out] workspace   array of length at least p
@@ -117,7 +117,7 @@ int egrss_dtrmv(
       }
     }
   } else {
-    /* d == NULL */
+    /* c == NULL */
     if (trans == 'N') {
       for (int i=0;i<n;i++) {
         /* Update z */

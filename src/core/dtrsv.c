@@ -117,7 +117,7 @@ int egrss_dtrsv(
         }
       }
     } else {
-      /* d == NULL */
+      /* c == NULL */
       if (trans == 'N') {
         for (int i=0;i<n;i++) {
 

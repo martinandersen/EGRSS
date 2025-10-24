@@ -26,7 +26,11 @@ if(BUILD_MEX)
             "R2022a=9.12"
             "R2022b=9.13"
             "R2023a=9.14"
-            "R2023b=9.15"
+            "R2023b=23.2"
+            "R2024a=24.1"
+            "R2024b=24.2"
+            "R2025a=25.1"
+            "R2025b=25.2"
     )
     add_subdirectory(src/matlab/mex)
     add_subdirectory(src/matlab/ref)

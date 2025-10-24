@@ -1,6 +1,11 @@
 
 include_directories(${CMAKE_SOURCE_DIR}/src/core)
-find_package(Matlab COMPONENTS MX_LIBRARY REQUIRED)
+find_package(Matlab REQUIRED COMPONENTS MX_LIBRARY MEX_COMPILER)
+
+# Add -ld_classic linker flag for recent Xcode versions on macOS
+if(APPLE)
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-ld_classic")
+endif()
 
 file(GLOB mfiles ../common/*.m)
 add_custom_target(egrss_matlab_common ALL
